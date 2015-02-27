@@ -12,7 +12,7 @@ namespace GLD.SerializerBenchmark
             // Data [int, string, class...] / TestRepetitions
             // Output: Average time per serialization + deserialization
 
-            var repetitions = int.Parse(args[0]);
+            var repetitions = 300;
             Console.WriteLine("Repetitions: " + repetitions);
             var serializers = new Dictionary<string, ISerDeser>
             {
@@ -23,6 +23,7 @@ namespace GLD.SerializerBenchmark
                 {"JilSerializer", new JilSerializer()},  // TODO: DateTime format?
                 {"JsonFxSerializer", new JsonFxSerializer()},  // TODO: DateTime format?
                 {"JsonNetSerializer",new JsonNetSerializer()},
+                {"BsonDocumentSerializer",new BsonDocumentSerializer()},
                 {"JsonNetStreamSerializer",new JsonNetStreamSerializer()},
                 {"MsgPackSerializer", new MsgPackSerializer()},  // TODO: DateTime format?
                 {"NetserializerSerializer", new NetSerializerSerializer(typeof(Person))},  
@@ -33,6 +34,7 @@ namespace GLD.SerializerBenchmark
            };
 
             Tester.Tests(repetitions, serializers);
+            Console.ReadKey();
         }
     }
 }
